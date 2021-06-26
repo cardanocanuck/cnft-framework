@@ -85,6 +85,7 @@ def get_tier(index, tier=None):
     if isinstance(tier, int):
         return tier
     step_size = 1000
+    print(f"in get_tier, step_size: {step_size} index: {index}")
     return int(index/step_size)
 
 
