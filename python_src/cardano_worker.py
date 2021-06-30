@@ -11,6 +11,11 @@ import tools.db_sync_tools as ds
 from tools.cardano_cli_extra import make_policy, mint_and_send, send_back
 from classes.token import doggie_token_constructor
 
+#new
+import logging
+from systemd import journal
+
+
 
 load_dotenv()
 shelley = ShelleyTools(

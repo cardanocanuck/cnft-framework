@@ -15,6 +15,7 @@ ExecStart=python3 launch_c_worker.py
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=cnft-worker
+Environment=PYTHONUNBUFFERED=1
                 
 [Install]
 WantedBy=multi-user.target

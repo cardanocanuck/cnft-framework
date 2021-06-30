@@ -10,7 +10,10 @@ channel = None
 
 last_heartbeat = None
 
+
+
 load_dotenv()
+rabbitmq_conn = getenv("RABBITMQ_HOST")
 if getenv("TOKENS_DB_URL"):
     db_tokens = psycopg2.connect(getenv("TOKENS_DB_URL"))
 
@@ -20,7 +23,7 @@ def get_channel():
     global last_heartbeat
 
     if not (connection and connection.is_open):
-        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(rabbitmq_conn))
 
     else:
         # Check it is still alive
@@ -30,7 +33,7 @@ def get_channel():
             try:
                 connection.process_data_events(time_limit=0.1)
             except Exception:
-                connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+                connection = pika.BlockingConnection(pika.ConnectionParameters(rabbitmq_conn))
                 channel = None
 
     if channel and channel.is_open:
@@ -48,7 +51,7 @@ def get_channel():
     return channel
 
 def get_channel_info():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(rabbitmq_conn))
     channel = connection.channel()
 
     return channel.queue_declare(queue='doggies', durable=False, exclusive=False, auto_delete=False,

@@ -154,6 +154,10 @@ class GenericInfo(object):
 
         resp.json = {'stats': db_stats, 'cardano_info': cardano_price}
 
+class ServerHealth(object):
+    # let's return an ok if process is alive
+    def on_get(self, req, resp):
+        resp.json = {'status': 'ok'}
 
 middleware = [
         LoadDBInterface(),
@@ -167,5 +171,6 @@ app.add_route('/reserve', ReserveToken())
 app.add_route('/status/{key}/{reserve_hash}', GetPurchaseStatus())
 app.add_route('/info', GenericInfo())
 app.add_route('/doggie/{doggie_id}', DoggieInfo())
+app.add_route('/health', ServerHealth())
 
 application = app
