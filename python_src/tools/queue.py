@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from os import getenv
 import time
 import psycopg2
+from tools.scripts.dogs_maintenance import derive_price
 
 connection = None
 channel = None

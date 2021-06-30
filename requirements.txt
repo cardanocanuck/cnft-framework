@@ -7,3 +7,4 @@ falcon-caching==0.3.4
 memcache==0.4.0
 pylibmc==1.6.1
 pika==1.2.0
+pillow

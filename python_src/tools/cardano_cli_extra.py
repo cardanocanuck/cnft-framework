@@ -88,7 +88,12 @@ def mint_and_send(shelley,
     sending_tokens = []
     minting_tokens = []
     merged_metadata = token_assets[0].metadata
+
     for token_asset in token_assets:
+        print("**")
+        print([constants.POLICY_HASH])
+        print('**')
+        print(token_asset.metadata)
         sending_tokens.append(f"+\"1 {constants.POLICY_HASH}.{token_asset.name}\"")
         minting_tokens.append(f"\"1 {constants.POLICY_HASH}.{token_asset.name}\"")
 
