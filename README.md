@@ -79,3 +79,8 @@ If you get error ShelleyTools has no run_cli method, then install it from the gi
 - Change the minting and storage addresses in .env file
 - `python3 launch_c_worker.py`
 
+## Setting up RabbitMQ for remote connections
+
+sudo rabbitmqctl add_user your_username your_password
+sudo rabbitmqctl set_permissions -p "/" "your_password" ".*" ".*" ".*"
+
