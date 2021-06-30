@@ -1,0 +1,21 @@
+[Unit]
+Description=CNFT Queue Worker Service
+After=syslog.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=15
+User=ubuntu
+#LimitNOFILE=131072
+WorkingDirectory=/home/ubuntu/git/cnft-framework/python_src
+ExecStart=python3 launch_queue_worker.py
+#SuccessExitStatus=143
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=cnft-queue
+Environment=PYTHONUNBUFFERED=1
+                
+[Install]
+WantedBy=multi-user.target
