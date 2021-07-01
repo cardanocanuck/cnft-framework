@@ -11,7 +11,7 @@ channel = None
 last_heartbeat = None
 
 load_dotenv()
-rabbitmq_conn = getenv("RABBITMQ_HOST")
+rabbitmq_conn = getenv("RABBITMQ_HOST") or 'localhost'
 rabbitmq_user = getenv("RABBITMQ_USER") or 'guest'
 rabbitmq_pw = getenv("RABBITMQ_PW") or 'guest'
 rabbitmq_params = pika.ConnectionParameters(rabbitmq_conn, credentials=pika.credentials.PlainCredentials(rabbitmq_user, rabbitmq_pw))
