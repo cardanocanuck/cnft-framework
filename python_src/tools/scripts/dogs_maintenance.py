@@ -84,7 +84,7 @@ def load_json_file(path_to_json=None):
 def get_tier(index, tier=None):
     if isinstance(tier, int):
         return tier
-    step_size = 1000
+    step_size = int(getenv("TIER_STEP_SIZE") or 2000)
     print(f"in get_tier, step_size: {step_size} index: {index}")
     return int(index/step_size)
 
@@ -94,17 +94,13 @@ def get_price(tier):
             12 * 1000000,
             22 * 1000000,
             32 * 1000000,
-            42 * 1000000,
-            52 * 1000000,
-            62 * 1000000,
-            72 * 1000000,
-            82 * 1000000,
-            92 * 1000000,
-            102 * 1000000,
-            102 * 1000000,
+            33 * 1000000,
+            34 * 1000000
             ]
-
-    return price_tiers[tier]
+    
+    price = price_tiers[tier]
+    print(f"getting price - returning {price}");
+    return price
 
 
 prices_hash = dict()
