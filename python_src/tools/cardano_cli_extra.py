@@ -27,10 +27,20 @@ def make_policy(shelley, name):
     policy_key_hash = shelley.run_cli(f"{shelley.cli} address key-hash --payment-verification-key-file {policy_vkey}").stdout
 
     policy_script_content = (
-            '{\n'
-            f'"keyHash": "{policy_key_hash}",\n'
-            f'"type": "sig"\n'
-            '}'
+        '{\n'
+           '"type": "all",\n'
+            '"scripts":\n'
+            '[\n'
+                '{\n'
+                f'"keyHash": "{policy_key_hash}",\n'
+                f'"type": "sig"\n'
+                '},\n'
+                '{\n'
+                f'"type": "before",\n'
+                '"slot": 44216109\n'
+                '}\n'
+            ']'
+        '}'
             )
     with open(f"{policy_script}", "w") as file_handle:
         file_handle.write(policy_script_content)
@@ -90,9 +100,7 @@ def mint_and_send(shelley,
     merged_metadata = token_assets[0].metadata
 
     for token_asset in token_assets:
-        print("**")
         print([constants.POLICY_HASH])
-        print('**')
         print(token_asset.metadata)
         sending_tokens.append(f"+\"1 {constants.POLICY_HASH}.{token_asset.name}\"")
         minting_tokens.append(f"\"1 {constants.POLICY_HASH}.{token_asset.name}\"")
