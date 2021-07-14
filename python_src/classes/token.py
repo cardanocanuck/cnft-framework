@@ -48,10 +48,10 @@ def token_constructor(token_id, metadata):
     return t
 
 def doggie_token_constructor(doggie_id, metadata):
-    json_path = constants.TOKENS_PATH / f"Canuckz{doggie_id}.json"
+    json_path = constants.TOKENS_PATH / f"Canuckz{ str(doggie_id).rjust(4, '0') }.json"
     with open(json_path, 'w') as f:
         f.write(json.dumps(metadata))
 
-    t = Token(f"Canuckz{doggie_id}", metadata, json_path)
+    t = Token(f"Canuckz{str(doggie_id).rjust(4, '0')}", metadata, json_path)
 
     return t
