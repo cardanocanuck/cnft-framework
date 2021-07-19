@@ -6,6 +6,7 @@ import random
 import os
 import tools.scripts.image_tools as it
 from tools.scripts.ipfs_tools import upload_to_ipfs
+from os import getenv
 
 PROCESSES=6
 
