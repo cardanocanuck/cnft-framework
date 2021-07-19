@@ -108,11 +108,11 @@ prices_hash = dict()
 def derive_price(index, tier=None, ignore_hash=False):
     global prices_hash
 
-    randomness = 2 * 1000000
+    randomness = 1000000
     tier = tier or get_tier(index)
 
     while True:
-        random_extra = random.randint(100,randomness)
+        random_extra = random.randint(1,randomness)
         value = get_price(tier) + random_extra
         if not (str(value) in prices_hash) or ignore_hash:
             break
